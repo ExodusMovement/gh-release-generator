@@ -1,8 +1,8 @@
 {
-  "name": "@exodus/linter-boilerplate",
+  "name": "@exodus/gh-release-generator",
   "private": true,
   "version": "0.1.0",
-  "description": "Insert description here.",
+  "description": "Not for publishing.",
   "author": "Exodus Movement Inc",
   "repository": {
     "type": "git",
@@ -18,6 +18,8 @@
     "src"
   ],
   "scripts": {
+    "format": "yarn prettier --write",
+    "prettier": "prettier \"src/**/*.mjs\"",
     "lint": "eslint .",
     "lint:fix": "yarn lint --fix"
   },
@@ -36,7 +38,18 @@
       "prettier"
     ],
     "rules": {
-      "prettier/prettier": "error"
+      "prettier/prettier": "error",
+      "lines-between-class-members": [
+        "error",
+        "always",
+        {
+          "exceptAfterSingleLine": true
+        }
+      ]
+    },
+    "parserOptions": {
+      "emcaVersion": "latest",
+      "sourceType": "module"
     }
   },
   "prettier": "@exodus/prettier",
