@@ -22,8 +22,5 @@ export default async function getReleases(octokit, owner, name) {
     { owner, name }
   )
 
-  return {
-    latestRelease: result?.repository?.latestRelease,
-    draftRelease: result?.repository?.release,
-  }
+  return result.repository
 }

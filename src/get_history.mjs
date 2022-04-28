@@ -1,21 +1,23 @@
 const query = `#graphql
   query GetHistory($owner: String!, $name: String!, $first: Int!,
     $since: GitTimestamp!, $after: String) {
-    object(expression: "master") {
-      ... on Commit {
-        history(first: $first, since: $since, after: $after) {
-          nodes {
-            oid
-            message
-            author {
-              user {
-                login
+    repository(owner: $owner, name: $name) {
+      object(expression: "master") {
+        ... on Commit {
+          history(first: $first, since: $since, after: $after) {
+            nodes {
+              oid
+              message
+              author {
+                user {
+                  login
+                }
               }
             }
-          }
-          pageInfo {
-            hasNextPage
-            endCursor
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
           }
         }
       }
@@ -32,12 +34,12 @@ export default async function getHistory(octokit, owner, name, since) {
 
   do {
     const result = await octokit.graphql(query, { owner, name, since, first: 100, after })
-    const pageInfo = result.object?.history?.pageInfo
+    const pageInfo = result.repository.object?.history?.pageInfo
 
     hasNextPage = pageInfo.hasNextPage
     after = pageInfo.endCursor
 
-    const theseNodes = result.object?.history?.nodes
+    const theseNodes = result.repository.object?.history?.nodes
 
     for (const node of theseNodes) {
       const lines = node.message.split('\n').map((line) => line.trim())
