@@ -24,19 +24,19 @@ export function createReleaseNotes(history) {
 //
 export async function writeReleaseNotes(octokit, owner, repo, id, notes) {
   if (id) {
-    await octokit.rest.repos.updateRelease({
+    await octokit.rest.repos.deleteRelease({
       owner,
       repo,
-      id,
-      body: notes,
-    })
-  } else {
-    await octokit.rest.repos.createRelease({
-      owner,
-      repo,
-      name: 'Automated Draft Release',
-      tag_name: 'draft-release-tag',
-      draft: true,
+      release_id: id,
     })
   }
+
+  await octokit.rest.repos.createRelease({
+    owner,
+    repo,
+    name: 'Automated Draft Release',
+    tag_name: 'draft-release-tag',
+    body: notes,
+    draft: true,
+  })
 }

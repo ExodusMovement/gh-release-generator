@@ -5,6 +5,7 @@ export default async function getReleases(octokit, owner, name) {
           repository(owner: $owner, name: $name) {
             latestRelease {
               id
+              databaseId
               name
               description
               tagCommit {
@@ -13,6 +14,7 @@ export default async function getReleases(octokit, owner, name) {
             }
             release(tagName: "draft-release-tag") {
               id
+              databaseId
               name
               description
             }
