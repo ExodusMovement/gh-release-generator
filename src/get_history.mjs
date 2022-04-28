@@ -56,9 +56,9 @@ export default async function getHistory(octokit, owner, name, since) {
       const typeMessages = messages[typeName] || []
 
       // Back up to last non-empty line
-      while (lines[--typeIndex] === '');
+      while (lines[typeIndex--] === '');
 
-      const description = lines.join('\n')
+      const description = lines.slice(0, typeIndex).join('\n')
 
       // Grab the action prefix, and get the full prefix up to the colon. This
       // handles instances like `feat(assets):`.

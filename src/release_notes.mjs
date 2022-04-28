@@ -1,16 +1,17 @@
 export function createReleaseNotes(history) {
   const notes = []
   const typeList = Object.keys(history)
-  for (const type of typeList) {
+  for (const type of typeList.sort()) {
     notes.push(`# ${type}\n`)
     const actions = history[type]
     const actionKeys = Object.keys(actions)
-    for (const action of actionKeys) {
+    for (const action of actionKeys.sort()) {
       notes.push(`## ${action}\n`)
       const descriptions = actions[action]
       for (const desc of descriptions) {
-        notes.push(desc)
+        notes.push(`- ${desc}`)
       }
+      notes.push('')
     }
   }
 
