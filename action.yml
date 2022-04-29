@@ -1,0 +1,12 @@
+name: 'GH Release Generator'
+description: 'Generates a set of release notes since last release based on release descriptions.'
+inputs:
+  github_token:
+    description: 'The GitHub token (if not provided the environment variable GITHUB_TOKEN will be used instead)'
+    required: false
+outputs:
+  id:
+    description: 'The release id'
+runs:
+  using: 'node14'
+  main: 'dist/index.mjs'
