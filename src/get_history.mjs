@@ -1,6 +1,6 @@
 const query = `#graphql
   query GetHistory($owner: String!, $name: String!, $first: Int!,
-    $since: GitTimestamp!, $after: String) {
+    $since: GitTimestamp, $after: String) {
     repository(owner: $owner, name: $name) {
       object(expression: "master") {
         ... on Commit {
