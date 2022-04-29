@@ -86,4 +86,24 @@ keyword preamble, then by order encountered in the commit list.
 
 ## How to setup up
 
-TODO
+Create a workflow file in your project under `.github/workflows/gh-release-generator.yml`. The file should look
+like this:
+
+```yaml
+name: GH Release Generator Action
+on:
+  push:
+    branches:
+      - master
+concurrency: ci-${{ github.repository }}
+jobs:
+  release_generator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GH Release Generator
+        uses: ExodusMovement/gh-release-generator@v1.0.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+Make sure you use the latest version of the release generator.
