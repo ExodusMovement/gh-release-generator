@@ -8,5 +8,5 @@ outputs:
   id:
     description: 'The release id'
 runs:
-  using: 'node14'
+  using: 'node16'
   main: 'dist/index.mjs'
