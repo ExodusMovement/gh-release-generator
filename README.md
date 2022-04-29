@@ -1,27 +1,89 @@
-# Linter Boilerplate
+# GH Release Generator Github Action
 
-This repository is meant to be used as a Github template repo for creating miscellaneous NPM packages or even to bootstrap a monorepo.
+This archive provides a Github Action which will iterate commits from the last
+release until the present, and create a set of release notes based on each
+commit message.
 
-It comes with `eslint` and `prettier` preconfigured according to standard Exodus configurations.
+## Expected structure of the commit message
 
-## Instructions
+At Exodus, we use conventional commits, so the description is expected to have a
+preamble keyword, followed by a colon ":", then followed by a commit message.
+Also, following the commit description will be a single keyword which will allow
+us to group the commits into releases.
 
-**1. Create a new repository.**
+The release keywords are:
 
-![Screenshot_2021-04-07_17-36-28](https://user-images.githubusercontent.com/31221309/113951183-e8813500-97c7-11eb-8edf-c80c33b98ac7.png)
+1. `prod`
+1. `genesis`
+1. `eden`
+1. `dev`
 
-**2. Select this repo as your template.**
+Typically these come after the description with two blank lines before it. The
+conventional commit will then allow us to further break these down into
+sub-categories. Some examples follow:
 
-![Screenshot_2021-04-07_17-40-50](https://user-images.githubusercontent.com/31221309/113951526-912f9480-97c8-11eb-9593-b1cdff2048ac.png)
+### Merged PR Commit Examples
 
-**3. Customize the `package.json` file for your purposes.**
+```
+feat(nfts): adding infinite scroll pagination on NFTs collection (#12833)
 
-- Fix the package name from `@exodus/linter-boilerplate`. Generally, best practice is to mirror the new repo's name in the package name: `@exodus/<repo_name>`.
-- Remove `"private": true` if this is a package you intend to publish to NPM.
-- Add a description.
-- Update the `repository`, `bugs`, and `homepage` URLs to point to your new repository instead of to `ExodusMovement/linter-boilerplate`.
-- Specify the license if applicable.
+prod
+```
 
-**4. Overwrite this README file with your own documentation.**
+```
+feat: Use constant DEV_START_ROUTE to configure a route to redirect to in DEV (#12886)
 
-**5. Start adding your own code!**
+dev
+```
+
+```
+docs: mention components demo in guide (#12884)
+
+dev
+```
+
+```
+fix: include multi-network-assets (#12878)
+
+prod
+```
+
+## Collated Release Body
+
+The merged commits are collated and ordered by release keyword, by commit
+keyword preamble, then by order encountered in the commit list.
+
+### Release Body Example
+
+```
+# dev
+
+## feat
+
+- Use constant DEV_START_ROUTE to configure a route to redirect to in DEV (#12886)
+- log binded action (#12883)
+
+# eden
+
+## feat
+
+- add KIN, POLIS, stSol, XCOPE, DFL, FTT, GENE, stETH to Eden (#12866)
+
+# prod
+
+## chore
+
+- eslint-plugin-simple-import-sort (#12264)
+- bump node-fetch 2.6.1 to 2.6.7 (#12490)
+
+## feat
+
+- remove dependence on backup key in info.seco (#12841)
+- hide network badge from portfolio donut (#12857)
+- add new currencies (#12829)
+- shorten assets name (#12766)
+```
+
+## How to setup up
+
+TODO
