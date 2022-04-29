@@ -1,4 +1,5 @@
 export default async function getReleases(octokit, owner, name) {
+  console.log(`getReleases() owner=${owner}, name=${name}`)
   const result = await octokit.graphql(
     `#graphql
         query GetReleases($owner: String!, $name: String!) {
