@@ -6,6 +6,7 @@ async function run() {
   try {
     const token = core.getInput('github_token') || process.env.GITHUB_TOKEN
     const octokit = new github.getOctokit(token)
+    console.log('github.context.repo=', github.context.repo)
 
     const id = await generateReleaseNotes(octokit, github.context.repo)
 
