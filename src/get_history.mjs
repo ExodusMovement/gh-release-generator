@@ -33,7 +33,6 @@ export default async function getHistory(octokit, owner, name, since) {
   let messages = {}
 
   do {
-    console.log(`getHistory() owner=${owner}, name=${name}, since=${since}`)
     const result = await octokit.graphql(query, { owner, name, since, first: 100, after })
     const pageInfo = result.repository.object?.history?.pageInfo
 
