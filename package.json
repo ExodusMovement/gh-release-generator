@@ -52,7 +52,10 @@
     "parserOptions": {
       "emcaVersion": "13",
       "sourceType": "module"
-    }
+    },
+    "ignorePatterns": [
+      "dist/*"
+    ]
   },
   "prettier": "@exodus/prettier",
   "devDependencies": {
