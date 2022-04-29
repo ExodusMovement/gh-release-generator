@@ -32,7 +32,7 @@ export async function writeReleaseNotes(octokit, owner, repo, id, notes) {
     })
   }
 
-  await octokit.rest.repos.createRelease({
+  const result = await octokit.rest.repos.createRelease({
     owner,
     repo,
     name: 'Automated Draft Release',
@@ -40,4 +40,6 @@ export async function writeReleaseNotes(octokit, owner, repo, id, notes) {
     body: notes,
     draft: true,
   })
+  console.log('release url: ', result.data.html_url)
+  return result.data.id
 }

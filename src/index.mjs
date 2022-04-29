@@ -7,9 +7,9 @@ async function run() {
     const token = core.getInput('github_token') || process.env.GITHUB_TOKEN
     const octokit = new github.getOctokit(token)
 
-    await generateReleaseNotes(octokit, github.context.repo)
+    const id = await generateReleaseNotes(octokit, github.context.repo)
 
-    core.setOutput('job done')
+    core.setOutput(id)
   } catch (err) {
     core.setFailed(err.message)
   }

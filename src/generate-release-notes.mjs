@@ -10,5 +10,6 @@ export default async function generateReleaseNotes(octokit, repo, owner = 'Exodu
 
   const history = await getHistory(octokit, owner, repo, since)
   const notes = await createReleaseNotes(history)
-  await writeReleaseNotes(octokit, owner, repo, id, notes)
+  const release_id = await writeReleaseNotes(octokit, owner, repo, id, notes)
+  return release_id
 }
