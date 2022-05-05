@@ -11,7 +11,10 @@ async function run() {
       },
     }),
   }
-  await generateReleaseNotes(octokit, { owner: 'ExodusMovement', repo: 'exodus-desktop' })
+  await generateReleaseNotes(octokit, {
+    owner: 'ExodusMovement',
+    repo: 'gh-release-generator-test',
+  })
 }
 
 run().catch(console.error)

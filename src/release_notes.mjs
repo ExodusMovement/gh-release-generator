@@ -1,12 +1,27 @@
-export function createReleaseNotes(history) {
+import { HIGHLIGHT_END, HIGHLIGHT_START, ACTIONS, TYPES } from './constants.mjs'
+
+export function createReleaseNotes(history, highlights) {
   const notes = []
+
+  // Preserve any comments at the top
+  if (highlights.length > 0) {
+    notes.push(HIGHLIGHT_START)
+    notes.push(...highlights)
+    notes.push(HIGHLIGHT_END)
+    notes.push('')
+  }
+
   const typeList = Object.keys(history)
+
+  // Go though all types first, drilling down into
+  // the actions. This sorts all of the entries alphabetically
+  // as well.
   for (const type of typeList.sort()) {
-    notes.push(`# ${type}\n`)
+    notes.push(`# ${TYPES[type]}\n`)
     const actions = history[type]
     const actionKeys = Object.keys(actions)
     for (const action of actionKeys.sort()) {
-      notes.push(`## ${action}\n`)
+      notes.push(`## ${ACTIONS[action]}\n`)
       const descriptions = actions[action]
       for (const desc of descriptions) {
         notes.push(`- ${desc}`)
@@ -35,7 +50,7 @@ export async function writeReleaseNotes(octokit, owner, repo, id, notes) {
   const result = await octokit.rest.repos.createRelease({
     owner,
     repo,
-    name: 'Automated Draft Release',
+    name: 'Automated Changelog',
     tag_name: 'draft-release-tag',
     body: notes,
     draft: true,

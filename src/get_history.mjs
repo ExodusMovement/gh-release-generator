@@ -1,3 +1,5 @@
+import { ACTIONS, TYPES } from './constants.mjs'
+
 const query = `#graphql
   query GetHistory($owner: String!, $name: String!, $first: Int!,
     $since: GitTimestamp, $after: String) {
@@ -24,9 +26,6 @@ const query = `#graphql
     }
   }`
 
-const ACTIONS = ['feat', 'fix', 'chore']
-const TYPES = ['prod', 'dev', 'eden', 'genesis']
-
 export default async function getHistory(octokit, owner, name, since) {
   let hasNextPage
   let after
@@ -46,7 +45,7 @@ export default async function getHistory(octokit, owner, name, since) {
 
       // Find the type line
       let typeIndex = lines.findIndex(
-        (line) => TYPES.findIndex((type) => line.startsWith(type)) !== -1
+        (line) => Object.keys(TYPES).findIndex((type) => line.startsWith(type)) !== -1
       )
 
       // If no such line, let's just skip this one since it's not interesting
@@ -62,10 +61,12 @@ export default async function getHistory(octokit, owner, name, since) {
 
       // Grab the action prefix, and get the full prefix up to the colon. This
       // handles instances like `feat(assets):`.
-      const actionPrefix = ACTIONS.findIndex((action) => description.startsWith(action))
+      const actionPrefix = Object.keys(ACTIONS).findIndex((action) =>
+        description.startsWith(action)
+      )
       if (actionPrefix === -1) {
-        typeMessages['none'] = typeMessages['none'] || []
-        typeMessages['none'].push(description)
+        typeMessages['misc'] = typeMessages['misc'] || []
+        typeMessages['misc'].push(description)
       } else {
         const colon = description.indexOf(':')
         const fullPrefix = description.slice(0, colon).trim()
