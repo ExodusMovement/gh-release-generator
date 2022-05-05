@@ -50,7 +50,7 @@ export async function writeReleaseNotes(octokit, owner, repo, id, notes) {
   const result = await octokit.rest.repos.createRelease({
     owner,
     repo,
-    name: 'Automated Draft Release',
+    name: 'Automated Changelog',
     tag_name: 'draft-release-tag',
     body: notes,
     draft: true,

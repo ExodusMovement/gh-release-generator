@@ -2,9 +2,9 @@ export const HIGHLIGHT_START = '<!-- HIGHLIGHTS -->'
 export const HIGHLIGHT_END = '<!-- END-HIGHLIGHTS -->'
 
 export const ACTIONS = {
-  feat: '🚀 Feature',
-  fix: '🐛 Bug Fix',
-  chore: '🏠 Chore',
+  feat: '🚀 Features',
+  fix: '🐛 Bug Fixes',
+  chore: '🏠 Chores',
   docs: '📜 Documentation',
   misc: '⚒ Miscellaneous',
 }
