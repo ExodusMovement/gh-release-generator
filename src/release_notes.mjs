@@ -1,6 +1,21 @@
-export function createReleaseNotes(history) {
+import { HIGHLIGHT_END, HIGHLIGHT_START } from './constants.mjs'
+
+export function createReleaseNotes(history, highlights) {
   const notes = []
+
+  // Preserve any comments at the top
+  if (highlights.length > 0) {
+    notes.push(HIGHLIGHT_START)
+    notes.push(...highlights)
+    notes.push(HIGHLIGHT_END)
+    notes.push('')
+  }
+
   const typeList = Object.keys(history)
+
+  // Go though all types first, drilling down into
+  // the actions. This sorts all of the entries alphabetically
+  // as well.
   for (const type of typeList.sort()) {
     notes.push(`# ${type}\n`)
     const actions = history[type]
