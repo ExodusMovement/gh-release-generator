@@ -1,4 +1,4 @@
-import { HIGHLIGHT_END, HIGHLIGHT_START } from './constants.mjs'
+import { HIGHLIGHT_END, HIGHLIGHT_START, ACTIONS, TYPES } from './constants.mjs'
 
 export function createReleaseNotes(history, highlights) {
   const notes = []
@@ -17,11 +17,11 @@ export function createReleaseNotes(history, highlights) {
   // the actions. This sorts all of the entries alphabetically
   // as well.
   for (const type of typeList.sort()) {
-    notes.push(`# ${type}\n`)
+    notes.push(`# ${TYPES[type]}\n`)
     const actions = history[type]
     const actionKeys = Object.keys(actions)
     for (const action of actionKeys.sort()) {
-      notes.push(`## ${action}\n`)
+      notes.push(`## ${ACTIONS[action]}\n`)
       const descriptions = actions[action]
       for (const desc of descriptions) {
         notes.push(`- ${desc}`)
