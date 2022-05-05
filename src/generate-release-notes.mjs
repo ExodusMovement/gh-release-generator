@@ -10,7 +10,12 @@ export default async function generateReleaseNotes(octokit, { owner, repo }) {
   const id = draftRelease?.databaseId
   const highlights = parseHighlights(draftRelease?.description)
 
+  console.info('highlights=', highlights)
+
   const history = await getHistory(octokit, owner, repo, since)
+
+  console.info('history=', history)
+
   const notes = await createReleaseNotes(history, highlights)
   const release_id = await writeReleaseNotes(octokit, owner, repo, id, notes)
   return release_id
