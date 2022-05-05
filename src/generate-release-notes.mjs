@@ -8,7 +8,7 @@ export default async function generateReleaseNotes(octokit, { owner, repo }) {
 
   const since = latestRelease?.tagCommit?.committedDate
   const id = draftRelease?.databaseId
-  const highlights = parseHighlights(draftRelease.description)
+  const highlights = parseHighlights(draftRelease?.description)
 
   const history = await getHistory(octokit, owner, repo, since)
   const notes = await createReleaseNotes(history, highlights)
