@@ -13,7 +13,7 @@ async function run() {
   }
   await generateReleaseNotes(octokit, {
     owner: 'ExodusMovement',
-    repo: 'gh-release-generator-test',
+    repo: process.env.REPO || 'gh-release-generator-test',
   })
 }
 
