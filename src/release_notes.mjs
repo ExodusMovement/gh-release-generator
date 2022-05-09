@@ -21,7 +21,14 @@ export function createReleaseNotes(history, highlights) {
     const actions = history[type]
     const actionKeys = Object.keys(actions)
     for (const action of actionKeys.sort()) {
-      notes.push(`## ${ACTIONS[action]}\n`)
+      const comma = action.indexOf('(')
+      let fullAction
+      if (comma === -1) {
+        fullAction = ACTIONS[action]
+      } else {
+        fullAction = ACTIONS[action.slice(0, comma)] + ' ' + action.slice(comma)
+      }
+      notes.push(`## ${fullAction}\n`)
       const descriptions = actions[action]
       for (const desc of descriptions) {
         notes.push(`- ${desc}`)
