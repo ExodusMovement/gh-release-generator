@@ -3,13 +3,15 @@ import { HIGHLIGHT_END, HIGHLIGHT_START, ACTIONS, TYPES } from './constants.mjs'
 export function createReleaseNotes(history, highlights) {
   const notes = []
 
-  // Preserve any comments at the top
+  // Preserve any comments at the top. Default to empty highlights.
+  notes.push(HIGHLIGHT_START)
+
   if (highlights.length > 0) {
-    notes.push(HIGHLIGHT_START)
     notes.push(...highlights)
-    notes.push(HIGHLIGHT_END)
-    notes.push('')
   }
+
+  notes.push(HIGHLIGHT_END)
+  notes.push('')
 
   const typeList = Object.keys(history)
 

@@ -84,6 +84,20 @@ keyword preamble, then by order encountered in the commit list.
 - shorten assets name (#12766)
 ```
 
+## Comments (Highlights)
+
+In order to add comments that you want to keep across generations as notes, use the following:
+
+```
+<!-- HIGHLIGHTS -->
+Notes go here.
+Add multiple lines!
+The action will preserve these comments always.
+<!-- END-HIGHLIGHTS -->
+```
+
+Empty highlights will be put into new draft changelogs.
+
 ## How to setup up
 
 Create a workflow file in your project under `.github/workflows/gh-release-generator.yml`. The file should look
