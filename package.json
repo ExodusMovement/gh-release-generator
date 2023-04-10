@@ -18,7 +18,7 @@
     "src"
   ],
   "scripts": {
-    "build": "ncc build src/index.mjs -m",
+    "build": "ncc build src/index.mjs --license upstream_licenses.txt",
     "build:test": "ncc build test/e2e-test.mjs -m",
     "format": "yarn prettier --write",
     "prettier": "prettier \"src/**/*.mjs\"",
@@ -69,7 +69,7 @@
     "prettier": "^2.2.1"
   },
   "dependencies": {
-    "@actions/core": "^1.9.1",
+    "@actions/core": "^1.10.0",
     "@actions/github": "^5.0.1"
   }
 }
