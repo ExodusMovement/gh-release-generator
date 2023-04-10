@@ -18,7 +18,7 @@
     "src"
   ],
   "scripts": {
-    "build": "ncc build src/index.mjs",
+    "build": "ncc build src/index.mjs --license upstream_licenses.txt",
     "build:test": "ncc build test/e2e-test.mjs -m",
     "format": "yarn prettier --write",
     "prettier": "prettier \"src/**/*.mjs\"",
