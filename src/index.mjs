@@ -10,7 +10,7 @@ async function run() {
 
     const id = await generateReleaseNotes(octokit, github.context.repo)
 
-    core.setOutput(id)
+    core.setOutput('releaseId', id)
   } catch (err) {
     core.setFailed(err.message)
   }
